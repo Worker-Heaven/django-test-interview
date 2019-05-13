@@ -3,8 +3,8 @@
 {% block content %}
 <div class="container">
 
-    <table class="table table-striped">
-        <thead>
+    <table class="table">
+        <thead class="thead-light">
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Address</th>
@@ -31,7 +31,7 @@
         </tbody>
     </table>
 
-    <div class="row pt-5">
+    <div class="row pt-5 pl-4">
         <a href="{% url 'client_new' %}">
             <button type="submit" class="btn btn-primary">Add New</button>
         </a>
