@@ -2,13 +2,34 @@
 
 {% block content %}
 <div class="container">
-    {% for client in clients %}
-    <div class="row">
-        <a href="{% url 'client_update' client_id=client.id %}">
-            {{ client.full_name }}
-        </a>
-    </div>
-    {% endfor %}
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Contact Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone Number</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for client in clients %}
+            <tr>
+                <th scope="row">
+                    <a href="{% url 'client_update' client_id=client.id %}">
+                        {{ client.full_name }}
+                    </a>
+                </th>
+                <th>{{ client.address }}</th>
+                <th>{{ client.contact_name }}</th>
+                <th>{{ client.email_address }}</th>
+                <th>{{ client.phone_number }}</th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
     <div class="row pt-5">
         <a href="{% url 'client_new' %}">
