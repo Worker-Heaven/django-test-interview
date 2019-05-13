@@ -1,0 +1,27 @@
+{% load static %}
+
+<html>
+    <head>
+        {% block title %}
+        <title>WebIT Django Assessment</title>
+        {% endblock %}
+
+        <link rel="stylesheet" type="text/css" href="{% static 'clientapp/css/bootstrap.min.css' %}" >
+        {% block css %} {% endblock %}
+    </head>
+
+    <body>
+        <div class="jumbotron text-center">
+            <h1>WebIT Django Assessment</h1>
+            <p>
+                To check that your knowledge/research ability to use the Django framework meets what's required of a python role with WebIT.
+            </p>
+        </div>
+
+        {% block content %}
+        {% endblock %}
+
+        <script type="text/javascript" src="{% static 'clientapp/jquery/jquery-3.4.1.min.js' %}"></script>
+        {% block javascript %} {% endblock %}
+    </body>
+</html>

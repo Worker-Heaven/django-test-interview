@@ -1,0 +1,12 @@
+{% extends 'clientapp/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <a href="{% url 'client_new' %}">
+            <button type="submit" class="btn btn-primary">Add New</button>
+        </a>
+    </div>
+</div>
+{% endblock %}
+
