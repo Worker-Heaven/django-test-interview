@@ -7,5 +7,5 @@
 
 
 {% block form %}
-<form method="POST" action="{% url template_url client_id=client_id %}">
+<form method="POST" action="{% url 'client_update' client_id=client_id %}">
 {% endblock %}

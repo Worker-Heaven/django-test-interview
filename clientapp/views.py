@@ -14,9 +14,7 @@ def index(request):
 def client_new(request):
     template = loader.get_template('clientapp/client_new.html')
     context = {
-        'template_url': 'client_new',
         'label': 'Save',
-        'client_id': 0,
     }
 
     if request.method == 'GET':
@@ -28,9 +26,13 @@ def client_new(request):
 def client_update(request, client_id):
     template = loader.get_template('clientapp/client_update.html')
     context = {
-        'template_url': 'client_update',
         'label': 'Update',
         'client_id': client_id,
+        'full_name': 'jackson',
+        'address': 'Fake Address',
+        'contact_name': 'Fake Contact Name',
+        'email_address': 'Fake Email Address',
+        'phone_number': 'Fake Phone Number',
     }
 
     if request.method == 'GET':
