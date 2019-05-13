@@ -9,18 +9,48 @@ from .models import Client
 def index(request):
     template = loader.get_template('clientapp/index.html')
 
-    clients = Client.objects.all()
-
     try:
         sort_order = request.GET['sortby']
     except KeyError:
         sort_order = 'full_name'
 
+    try:
+        full_name = request.GET['full_name']
+    except KeyError:
+        full_name = ''
 
-    clients = Client.objects.order_by(sort_order)
+    try:
+        contact_name = request.GET['contact_name']
+    except KeyError:
+        contact_name = ''
+
+    try:
+        email_address = request.GET['email_address']
+    except KeyError:
+        email_address = ''
+
+    try:
+        phone_number = request.GET['phone_number']
+    except KeyError:
+        phone_number = ''
+
+
+    clients = Client.objects.filter(
+        full_name__contains=full_name
+        ).filter(
+            contact_name__contains=contact_name
+        ).filter(
+            email_address__contains=email_address
+        ).filter(
+            phone_number__contains=phone_number
+        ).order_by(sort_order)
 
     context = {
         'clients': clients,
+        'full_name': full_name,
+        'contact_name': contact_name,
+        'email_address': email_address,
+        'phone_number': phone_number,
     }
 
     return HttpResponse(template.render(context, request))

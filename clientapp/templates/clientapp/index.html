@@ -3,55 +3,49 @@
 {% block content %}
 <div class="container">
 
-    <form method="POST" action="{% url 'index' %}">
-
-        <div id="search_box" class="collapse">
-            <div class="row justify-content-between">
-                <div class="row col-sm-6 d-flex container mt-2" id="client-info">
-                    <label for="full_name" class="col-sm-4 col-form-label">
-                        Full Name
-                        <span style="color: red">*</span>
-                    </label>
-                    <div class="col-sm-8">
-                        <input type="input" id="full_name" class="form-control" name="full_name" value="{{ full_name }}">
-                    </div>
-                </div>
-
-                <div class="row col-sm-6 d-flex container mt-2" id="client-info">
-                    <label for="contact_name" class="col-sm-4 col-form-label">Contact Name</label>
-                    <div class="col-sm-8">
-                        <input type="input" id="contact_name" class="form-control" name="contact_name" value="{{ contact_name }}">
-                    </div>
+    <div id="search_box" class="collapse show">
+        <div class="row justify-content-between">
+            <div class="row col-sm-6 d-flex container mt-2">
+                <label for="full_name_option" class="col-sm-4 col-form-label">
+                    Full Name
+                </label>
+                <div class="col-sm-8">
+                    <input type="input" id="full_name_option" class="form-control" name="full_name" value="{{ full_name }}">
                 </div>
             </div>
 
-            <div class="row justify-content-between">
-                <div class="row col-sm-6 d-flex container mt-2" id="client-info">
-                    <label for="email_address" class="col-sm-4 col-form-label">
-                        Email Address
-                        <span style="color: red">*</span>
-                    </label>
-                    <div class="col-sm-8">
-                        <input type="email" id="email_address" class="form-control" name="email_address" aria-describedby="emailHelp" value="{{ email_address }}">
-                    </div>
+            <div class="row col-sm-6 d-flex container mt-2">
+                <label for="contact_name_option" class="col-sm-4 col-form-label">Contact Name</label>
+                <div class="col-sm-8">
+                    <input type="input" id="contact_name_option" class="form-control" name="contact_name" value="{{ contact_name }}">
                 </div>
-
-                <div class="row col-sm-6 d-flex container mt-2" id="client-info">
-                    <label for="phone_number" class="col-sm-4 col-form-label">
-                        Phone Number
-                        <span style="color: red">*</span>
-                    </label>
-                    <div class="col-sm-8">
-                        <input type="input" id="phone_number" class="form-control" name="phone_number" value="{{ phone_number }}">
-                    </div>
-                </div>
-            </div>
-
-            <div class="row d-flex align-items-end justify-content-end pr-3 pb-2 mt-3">
-                <button class="btn btn-info" type="submit">Search</button>
             </div>
         </div>
-    </form>
+
+        <div class="row justify-content-between">
+            <div class="row col-sm-6 d-flex container mt-2">
+                <label for="email_address_option" class="col-sm-4 col-form-label">
+                    Email Address
+                </label>
+                <div class="col-sm-8">
+                    <input type="email" id="email_address_option" class="form-control" name="email_address" aria-describedby="emailHelp" value="{{ email_address }}">
+                </div>
+            </div>
+
+            <div class="row col-sm-6 d-flex container mt-2">
+                <label for="phone_number_option" class="col-sm-4 col-form-label">
+                    Phone Number
+                </label>
+                <div class="col-sm-8">
+                    <input type="input" id="phone_number_option" class="form-control" name="phone_number" value="{{ phone_number }}">
+                </div>
+            </div>
+        </div>
+
+        <div class="row d-flex align-items-end justify-content-end pr-3 pb-2 mt-3">
+            <button class="btn btn-info" type="button" id="client_search">Search</button>
+        </div>
+    </div>
 
 
     <div class="row d-flex align-items-baseline justify-content-end pr-3 pb-2 mt-1">
@@ -64,15 +58,15 @@
         <div class="ml-3">
             <label for="sort-by">Sort By:</label>
             <select class="ml-2" id="sort-by">
-                <option value="{% url 'index' %}?sortby=full_name" id="full_name">
+                <option value="full_name" id="full_name">
                     Name
                 </option>
 
-                <option value="{% url 'index' %}?sortby=email_address" id="email_address">
+                <option value="email_address" id="email_address">
                     Email Address
                 </option>
 
-                <option value="{% url 'index' %}?sortby=phone_number" id="phone_number">
+                <option value="phone_number" id="phone_number">
                     Phone Number
                 </option>
             </select>
@@ -124,8 +118,51 @@
 
         $("#"+sortby).attr('selected', 'selected');
 
+        const currentUrl = (window.location.href).split(/[?#]/)[0];
+        console.log(params.get("sortby"));
+
+
         $("#sort-by").change(function() {
-            window.location = this.value
+            full_name = $("#full_name_option").val()
+            contact_name = $("#contact_name_option").val()
+            email_address = $("#email_address_option").val()
+            phone_number = $("#phone_number_option").val()
+            sortby = $("#sort-by").val()
+
+            console.log(full_name)
+            console.log(contact_name)
+            console.log(email_address)
+            console.log(phone_number)
+            console.log(sortby)
+
+            window.location = currentUrl + '?' +
+                'sortby=' + sortby + '&' +
+                'full_name=' + full_name + '&' +
+                'contact_name=' + contact_name + '&' +
+                'email_address=' + email_address + '&' +
+                'phone_number=' + phone_number;
+        });
+
+
+        $('#client_search').click(function() {
+            full_name = $("#full_name_option").val()
+            contact_name = $("#contact_name_option").val()
+            email_address = $("#email_address_option").val()
+            phone_number = $("#phone_number_option").val()
+            sortby = $("#sort-by").val()
+
+            console.log(full_name)
+            console.log(contact_name)
+            console.log(email_address)
+            console.log(phone_number)
+            console.log(sortby)
+
+            window.location = currentUrl + '?' +
+                'sortby=' + sortby + '&' +
+                'full_name=' + full_name + '&' +
+                'contact_name=' + contact_name + '&' +
+                'email_address=' + email_address + '&' +
+                'phone_number=' + phone_number;
         });
     });
 </script>
