@@ -2,6 +2,22 @@
 
 {% block content %}
 <div class="container">
+    <div class="row d-flex align-items-baseline justify-content-end pr-3 pb-2">
+        <label for="sort-by">Sort By:</label>
+        <select class="ml-2" id="sort-by">
+            <option>
+                <a href="{% url 'index' %}?sortby=full_name">Name</a>
+            </option>
+
+            <option>
+                <a href="{% url 'index' %}?sortby=email_address">Email Address</a>
+            </option>
+
+            <option>
+                <a href="{% url 'index' %}?sortby=phone_number">Phone Number</a>
+            </option>
+        </select>
+    </div>
 
     <table class="table">
         <thead class="thead-light">
