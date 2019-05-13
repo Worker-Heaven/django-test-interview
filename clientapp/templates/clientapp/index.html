@@ -5,16 +5,16 @@
     <div class="row d-flex align-items-baseline justify-content-end pr-3 pb-2">
         <label for="sort-by">Sort By:</label>
         <select class="ml-2" id="sort-by">
-            <option>
-                <a href="{% url 'index' %}?sortby=full_name">Name</a>
+            <option value="{% url 'index' %}?sortby=full_name" id="full_name">
+                Name
             </option>
 
-            <option>
-                <a href="{% url 'index' %}?sortby=email_address">Email Address</a>
+            <option value="{% url 'index' %}?sortby=email_address" id="email_address">
+                Email Address
             </option>
 
-            <option>
-                <a href="{% url 'index' %}?sortby=phone_number">Phone Number</a>
+            <option value="{% url 'index' %}?sortby=phone_number" id="phone_number">
+                Phone Number
             </option>
         </select>
     </div>
@@ -55,3 +55,19 @@
 </div>
 {% endblock %}
 
+
+{% block javascript %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        let params = (new URL(document.location)).searchParams;
+        let sortby = params.get("sortby");
+        console.log('sortby', sortby);
+
+        $("#"+sortby).attr('selected', 'selected');
+
+        $("#sort-by").change(function() {
+            window.location = this.value
+        });
+    });
+</script>
+{% endblock %}

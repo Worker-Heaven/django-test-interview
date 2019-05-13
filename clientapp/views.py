@@ -10,6 +10,15 @@ def index(request):
     template = loader.get_template('clientapp/index.html')
 
     clients = Client.objects.all()
+
+    try:
+        sort_order = request.GET['sortby']
+    except KeyError:
+        sort_order = 'full_name'
+
+
+    clients = Client.objects.order_by(sort_order)
+
     context = {
         'clients': clients,
     }
